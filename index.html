@@ -821,12 +821,61 @@ section { padding: 120px 60px; }
   color: #fff;
   letter-spacing: 0.06em;
 }
-.proj-sm { background: linear-gradient(135deg, #0000ff22, #111118); }
+
+
+.ai-work { display: none; }
+.ai-work.active { display: block; }
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+.ai-card {
+  position: relative;
+  aspect-ratio: 17/10;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  group: true;
+}
+.ai-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+.ai-card:hover img{
+  filter: blur(3px);
+}
+.ai-card:hover img { transform: scale(1.05); }
+.ai-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #000000, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+.ai-card:hover .ai-card-overlay { opacity: 1; }
+.ai-card-label {
+  font-size: 10px;
+  font-family: 'arial', sans-serif;
+  font-weight: 100;
+  color: #fff;
+  letter-spacing: 0.06em;
+}
+
 /* Social media cards → 1:1 square ratio */
+#ai-items .ai-card { aspect-ratio: 4/5; }
 #panel-social .project-card { aspect-ratio: 1/1; }
 #panel-logo .project-card { aspect-ratio: 1/1; }
 #panel-uiux .project-card { aspect-ratio: 1.28/1; }
 #panel-web .project-card { aspect-ratio: 1.28/1; }
+
+.proj-sm { background: linear-gradient(135deg, #0000ff22, #111118); }
 .proj-yt { background: linear-gradient(135deg, #ff000022, #111118); }
 .proj-logo { background: linear-gradient(135deg, #ffaa0022, #111118); }
 .proj-ui { background: linear-gradient(135deg, #00ffaa22, #111118); }
@@ -835,6 +884,38 @@ section { padding: 120px 60px; }
 /* ─── LIGHTBOX ─── */
 .project-card { cursor: zoom-in; }
 .project-card-overlay { pointer-events: none; } /* overlay doesn't block clicks */
+
+.ai-card { cursor: zoom-in; }
+.ai-card-overlay { pointer-events: none; } /* overlay doesn't block clicks */
+
+/* Copy prompt button */
+.ai-copy-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s, background 0.2s;
+  pointer-events: all;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.ai-card:hover .ai-copy-btn { opacity: 1; }
+.ai-copy-btn.copied {
+  background: #22c55e;
+}
+.ai-copy-btn svg { flex-shrink: 0; }
 
 .lightbox {
   display: none;
@@ -1692,6 +1773,27 @@ section { padding: 120px 60px; }
 </div>
 </section>
 
+<!-- Ai-Generated -->
+<section class="Ai-Generated" id="Ai-Generated">
+  <div style="text-align:center; margin-bottom:60px">
+    <div class="section-tag" style="justify-content:center">Ai Artwork</div>
+    <h2 class="section-heading">Ai <span style="color:var(--blue); font-weight: 100;">Creations</span></h2>
+    <p class="section-sub">Generated with ChatGPT - Designed with vision</p>
+  </div>
+
+  <div class="ai-work active" id="ai-items">
+    <div class="ai-grid">
+      <div class="ai-card"><img src="ai1.jpg" alt="product-image" loading="lazy"><button class="ai-copy-btn" onclick="copyPrompt(this)" title="Copy Prompt"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><div class="ai-card-overlay"><span class="ai-card-label">"Create an ultra-realistic, luxury royal portrait using the uploaded person's photo as the reference. Preserve the person's exact facial features, hairstyle, skin tone, body proportions, expression, and identity. Place the subject seated confidently on an intricately carved luxury throne with rich velvet upholstery in (YOUR COLOR), accented with polished metallic silver details. The subject wears a premium tailored formal suit in (YOUR COLOR) with elegant royal-inspired accessories, including a ceremonial sash, brooch, cufflinks, and a luxury wristwatch that match the chosen color palette. The background features a magnificent grand palace interior with towering marble columns, symmetrical royal staircases, crystal chandeliers, ornate architectural details, and soft daylight entering through massive arched windows. Add elegant hanging royal banners in (YOUR COLOR), luxurious carpets, decorative vases, and subtle palace ornaments. Everything should appear perfectly symmetrical, clean, and premium. Use cinematic lighting with soft volumetric rays, realistic global illumination, HDR lighting, ray-traced reflections, natural shadows, ambient occlusion, shallow depth of field, and subtle rainbow prism lens flares for a premium editorial look. The throne should be centered with a powerful, confident composition, creating a king-like luxury atmosphere. No text, typography, logos, watermarks, icons, graphics, symbols, borders, frames, signatures, or overlays. Focus entirely on the visual composition. Photorealistic, hyper-detailed, ultra-sharp, 8K, HDR, professional color grading, premium fashion editorial, luxury portrait photography, flawless skin texture, realistic fabric details, highly detailed metallic carvings, cinematic masterpiece, Unreal Engine quality, Octane Render, maximum detail. Aspect Ratio: 4:5 (1080 × 1350 px)"</span></div></div>
+      <div class="ai-card"><img src="ai2.jpg" alt="product-image" loading="lazy"><button class="ai-copy-btn" onclick="copyPrompt(this)" title="Copy Prompt"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><div class="ai-card-overlay"><span class="ai-card-label">"Transform this photo into the viral flowing sky effect. Keep the person's face, pose, outfit, body proportions, and camera angle completely unchanged. Replace only the sky with massive flowing luminous cloud streaks, creating a dreamy liquid-motion effect, as if the clouds are made of glowing silk or long-exposure light trails. The light should radiate naturally from behind the subject, blending into the environment with realistic atmospheric lighting. Preserve all trees, buildings, foreground, and composition while subtly enhancing them with cinematic contrast. Ultra-realistic, highly detailed, surreal yet believable, volumetric lighting, soft glow, blue and warm golden color palette, premium HDR photography, smooth flowing energy, viral Instagram aesthetic, masterpiece, 8K, natural colors, no extra people, no distortion, no anatomy changes, no face changes, no artifacts, no text"</span></div></div>
+      <div class="ai-card"><img src="ai3.jpg" alt="product-image" loading="lazy"><button class="ai-copy-btn" onclick="copyPrompt(this)" title="Copy Prompt"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><div class="ai-card-overlay"><span class="ai-card-label">"Transform this image into a breathtaking ultra-realistic foggy forest masterpiece. Add dense natural white fog covering the entire environment, creating a mysterious and cinematic atmosphere. Apply rich forest-inspired color grading with deep emerald green, dark teal, moss green, and earthy brown tones. Enhance the trees, foliage, and background elements to resemble a lush enchanted forest hidden in the mist. Introduce soft volumetric light rays subtly penetrating through the fog, creating depth and realism. Increase overall image quality to ultra-high-definition 4K resolution with razor-sharp details, HDR enhancement, realistic textures, balanced contrast, and natural color harmony. Improve shadows, highlights, and dynamic range while maintaining a realistic appearance. Add a moody woodland aesthetic, dreamy fog layers, atmospheric perspective, and professional cinematic photography grading. The final result should look like a premium DSLR forest photograph captured during a cold misty morning, with ultra-realistic details, immersive depth, soft natural lighting, and stunning visual quality. Style: Cinematic Forest Photography, Moody Nature, Dense Fog Weather, Volumetric Lighting, HDR, Ultra Realistic, Professional Color Grading, 4K Quality, DSLR Shot, Atmospheric Depth, Photorealistic."</span></div></div>
+      <div class="ai-card"><img src="ai4.jpg" alt="product-image" loading="lazy"><button class="ai-copy-btn" onclick="copyPrompt(this)" title="Copy Prompt"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><div class="ai-card-overlay"><span class="ai-card-label">"Use the uploaded photo as the main subject and keep the person’s exact face, hairstyle, skin tone, pose, and outfit unchanged. Place the person sitting on outdoor stairs under a bright blue sky with clouds. Add a friendly cartoon/anime companion sitting beside the person with one arm on the shoulder. Use customizable outfit colors: [PRIMARY COLOR] and [SECONDARY COLOR]. Surround the scene with colorful doodles, graffiti elements, arrows, stars, smiley faces, paint splashes, and brush-stroke graphics using [ACCENT COLOR 1], [ACCENT COLOR 2], and [ACCENT COLOR 3]. Replace all text with editable custom words: “[MAIN TITLE]”, “[BOTTOM MAIN TEXT]”, “[BOTTOM QUOTE]”, and “[SPEECH BUBBLE TEXT]”. Make the human photorealistic, the cartoon character premium animated style, and the overall design vibrant, motivational, and social-media-ready in 4:5 ratio (1080×1350)"</span></div></div>
+      <div class="ai-card"><img src="ai5.jpg" alt="product-image" loading="lazy"><button class="ai-copy-btn" onclick="copyPrompt(this)" title="Copy Prompt"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><div class="ai-card-overlay"><span class="ai-card-label">"A black and white, gritty portrait of a man (using the same face as uploaded image) with a beard and messy hair, looking intensely to the right. He is wearing a dark, open-collared shirt and is leaning on a railing or surface with his forearms. A stylish sunglasses. The background is dark and out of focus, suggesting an urban or somewhat rugged setting. The mood is serious and contemplative." A cleaner version of the prompt would be, Size 4:5"</span></div></div>
+      <div class="ai-card"><img src="ai6.jpg" alt="product-image" loading="lazy"><button class="ai-copy-btn" onclick="copyPrompt(this)" title="Copy Prompt"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt</button><div class="ai-card-overlay"><span class="ai-card-label">"A cinematic portrait of me standing against an old, weathered wall beside a vintage wooden door in a dimly lit abandoned room. Warm golden-hour sunlight streams through a window, casting dramatic window-frame shadows across the wall and my face. I wear a plain black oversized sweater with tousled dark hair, looking thoughtfully to the side with a calm, serious expression, Size 4:5"</span></div></div>
+    </div>
+  </div>
+</section>
+<!-- Ai_Generated -->
+
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div style="text-align:center;margin-bottom:60px">
@@ -2224,6 +2326,12 @@ if (window.innerWidth > 900) {
     });
   });
 
+ document.querySelectorAll('.ai-card').forEach(function(card) {
+    card.addEventListener('click', function() {
+      if (card.querySelector('img')) openLightbox(card);
+    });
+  });
+
   // Keyboard
   document.addEventListener('keydown', function(e) {
     var lb = document.getElementById('lightbox');
@@ -2233,6 +2341,37 @@ if (window.innerWidth > 900) {
     if (e.key === 'ArrowRight') lbNav(1);
   });
 })();
+
+// ─── COPY PROMPT ───
+function copyPrompt(btn) {
+  btn.stopPropagation && btn.stopPropagation();
+  var card = btn.closest('.ai-card');
+  var label = card.querySelector('.ai-card-label');
+  if (!label) return;
+  var text = label.textContent.trim();
+  var successHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Copied!';
+  var defaultHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="1"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Prompt';
+  function showSuccess() {
+    btn.classList.add('copied');
+    btn.innerHTML = successHTML;
+    setTimeout(function() {
+      btn.classList.remove('copied');
+      btn.innerHTML = defaultHTML;
+    }, 2500);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(showSuccess).catch(fallback);
+  } else { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    try { document.execCommand('copy'); showSuccess(); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+}
 </script>
 </body>
 </html>
